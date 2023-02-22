@@ -10,17 +10,28 @@
         <form method="post">
 
             <h1>Enter a New Movie</h1>
-            <h3>Include the following information about the movie itself. (Not all fields are required).</h3>
+            <h3>Include the following information about the movie itself. </h3>
+            <h5>(Not all fields are required).</h5>
+
+            <div asp-validation-summary="All"></div>
+         
+            <input asp-for="MovieId" type="hidden" />
 
             <label asp-for="movieTitle">Title of Movie:</label>
             <input asp-for="movieTitle" />
             <br />
 
-            <label asp-for="Category">Movie Category:</label>
-            <input asp-for="Category" />
+            <label asp-for="categoryID">Movie Category:</label>
+            <select asp-for="categoryID">
+                <option value="">Select A Category</option>
+                @foreach (Category c in ViewBag.Categories)
+            {
+                <option value="@c.categoryID">@c.categoryName</option>
+            }
+            </select>
             <br />
             <label asp-for="Year">Year:</label>
-            <input asp-for="Year" />
+            <input asp-for="Year" value="" />
             <br />
             <label asp-for="directorName">Director's Name:</label>
             <input asp-for="directorName" />
@@ -28,9 +39,10 @@
 
             <label asp-for="Rating">Movie Rating:</label>
             <select asp-for="Rating">
+                <option value=""> </option>
                 <option value="G">G</option>
                 <option value="PG">PG</option>
-                <option value="PG13">PG-13</option>
+                <option value="PG-13">PG-13</option>
                 <option value="R">R</option>
             </select>
             <br />
@@ -52,6 +64,5 @@
 
             <input type="submit" value="Submit" />
 
-            <div asp-validation-summary="All"></div>
         </form>
     </div>

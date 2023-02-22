@@ -16,9 +16,6 @@ namespace Mission6.Models
         [Required(ErrorMessage="The Movie Title field is required.")]
         public string movieTitle { get; set; }
    
-        [Required(ErrorMessage = "The Movie Category field is required.")]
-        public string Category { get; set; }
-
         [Required(ErrorMessage = "The Year field is required.")]
         public int Year { get; set; }
  
@@ -34,17 +31,12 @@ namespace Mission6.Models
 
         [StringLength(25)]
         public string Notes { get; set; }
+        //make FK for Category
+
+        [Required(ErrorMessage = "The Movie Category field is required.")]
+        public int categoryID { get; set; }
+
+        public Category Category { get; set; }
 
     }
 }
-
-
-MovieId
-movieTitle
-Category
-Year
-directorName
-Rating
-Edited
-lentTo
-Notes

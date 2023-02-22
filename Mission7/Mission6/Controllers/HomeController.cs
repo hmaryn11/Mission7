@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Mission6.Models;
 using System;
@@ -32,7 +33,8 @@ namespace Mission6.Controllers
         [HttpGet]
         public IActionResult EnterMovie()
         {
-            return View();
+            ViewBag.Categories = _movieContext.Categories.ToList();
+            return View(new EntryResponse());
         }
 
         [HttpPost]
@@ -49,5 +51,24 @@ namespace Mission6.Controllers
                 return View();
             }
         }
+        public IActionResult MovieTable()
+        {
+            var entry = _movieContext.Responses
+                .Include(x => x.Category)
+                .OrderBy(y => y.movieTitle)
+                .ToList();
+
+            return View(entry);
+        }
+        public IActionResult Edit()
+        {
+            return View();
+        }
+
+        public IActionResult Delete()
+        {
+            return View();
+        }
+
     }
 }

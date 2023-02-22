@@ -1,14 +1,45 @@
 ﻿
-@{ ViewData["Title"] = "Movie Table";
-}
+@{ ViewData["Title"] = "Movie Table";}
+@model List<EntryResponse>
 
-<table>
-    <thead>
-
+<table class="table table-bordered">
+    <thead class="font-weight-bold">
+        <tr>
+            <td>Movie Title</td>
+            <td>Category</td>
+            <td>Year</td>
+            <td>Director Name</td>
+            <td>Rating</td>
+            <td>Edited</td>
+            <td>Lent To</td>
+            <td>Notes</td>
+        </tr>
     </thead>
     <tbody>
-        <tr>
-            <td></td>
-        </tr>
+        @foreach (var x in Model)
+            {
+            <tr>
+                <td>@x.movieTitle</td>
+                <td>@x.Category.categoryName</td>
+                <td>@x.Year</td>
+                <td>@x.directorName</td>
+                <td>@x.Rating</td>
+                <td>@x.Edited</td>
+                <td>@x.lentTo</td>
+                <td>@x.Notes</td>
+
+                <td><a asp-controller="Home" asp-action="Edit">Edit</a></td>
+                <td><a asp-controller="Home" asp-action="Delete">Delete</a></td>
+            </tr>
+            }
     </tbody>
 </table>
+
+
+
+
+
+
+
+
+

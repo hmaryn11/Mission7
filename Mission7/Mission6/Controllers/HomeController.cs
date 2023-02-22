@@ -94,9 +94,12 @@ namespace Mission6.Controllers
         }
 
         [HttpPost]
-        public IActionResult Delete()
-        { 
-            return View("Deleted");
+        public IActionResult Delete(EntryResponse er)
+        {
+            _movieContext.Responses.Remove(er);
+            _movieContext.SaveChanges();
+
+            return RedirectToAction("MovieTable");
         }
 
     }

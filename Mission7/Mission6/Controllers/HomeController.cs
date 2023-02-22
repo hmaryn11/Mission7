@@ -48,26 +48,55 @@ namespace Mission6.Controllers
             }
             else
             {
+                ViewBag.Categories = _movieContext.Categories.ToList();
+
                 return View();
             }
         }
         public IActionResult MovieTable()
         {
-            var entry = _movieContext.Responses
+            var entries = _movieContext.Responses
                 .Include(x => x.Category)
                 .OrderBy(y => y.movieTitle)
                 .ToList();
 
-            return View(entry);
+            return View(entries);
         }
-        public IActionResult Edit()
+        [HttpGet]
+        public IActionResult Edit(int appid)
         {
-            return View();
+            ViewBag.Categories = _movieContext.Categories.ToList();
+
+            var entry = _movieContext.Responses.Single(x => x.MovieId == appid);
+
+            return View("EnterMovie", entry);
         }
 
-        public IActionResult Delete()
+        [HttpPost]
+        public IActionResult Edit(EntryResponse newEdit)
         {
-            return View();
+            _movieContext.Update(newEdit);
+            _movieContext.SaveChanges();
+
+            return RedirectToAction("MovieTable");
+        }
+
+        //private IActionResult View(Func<IActionResult> movieTable)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        [HttpGet]
+        public IActionResult Delete(int appid)
+        {
+            var entry = _movieContext.Responses.Single(x => x.MovieId == appid);
+            return View("Deleted", entry);
+        }
+
+        [HttpPost]
+        public IActionResult Delete()
+        { 
+            return View("Deleted");
         }
 
     }

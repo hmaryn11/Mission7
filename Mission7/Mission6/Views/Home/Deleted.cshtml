@@ -3,12 +3,14 @@
 }
 @model EntryResponse;
 
-<h2>Confirm Deletion</h2>
-<h4>Are you sure you want to delete the record for @Model.movieTitle?</h4>
+<div class="text-xl-center">
+    <h2>Confirm Deletion</h2>
+    <h4>Are you sure you want to delete the record for @Model.movieTitle?</h4>
 
-<form method="post" asp-action="Delete">
-    <button type="submit">Delete</button>
-    <a class="btn btn-primary" asp-controller="Home" asp-action="MovieTable">Cancel</a>
-    
-    <input type="hidden" asp-for="MovieId"/>
-</form>
+    <form method="post" asp-action="Delete">
+        <button type="submit">Delete</button>
+        <a class="btn btn-primary" asp-controller="Home" asp-action="MovieTable">Cancel</a>
+
+        <input type="hidden" asp-for="MovieId" />
+    </form>
+</div>
